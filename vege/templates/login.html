@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{%block content %} 
+    <div class="container mt-5">
+        <form class="col-6  mx-auto card p-3 shadow-lg" method="post" enctype="multipart/form-data" id="loginForm">
+            {% csrf_token %}
+        <h2 class="container-md  text-center">Login Here ! </h1>
+            <hr>
+                    {% if messages %}
+                    <div class="alert alert-secondary text-center" role="alert">
+                        {% for message in messages %}
+                        {{ message }}
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                <div class="mb-3">
+                  <label for="exampleInputEmail1" class="form-label" >Username</label>
+                  <input type="text"  name="username"  class="form-control" id="exampleInputEmail1" required>
+                </div>
+                <div class="mb-3">
+                  <label for="exampleInputPassword1" class="form-label">Password</label>
+                  <input type="password" class="form-control" id="exampleInputPassword1" name="password" required>
+                </div>
+                <button type="submit" id="loginButton" class="btn btn-success">
+                    <span id="spinner" class="spinner-border spinner-border-sm" role="status" aria-hidden="true" style="display: none;"></span>
+                    Login
+                </button>
+            <p>Do not have any account ? <a href="/register/">Register here</a></p>
+      </form>
+      </div>
+      </div>
+      <script>
+        // JavaScript to show the spinner when the login button is clicked
+        document.getElementById('loginForm').addEventListener('submit', function (e) {
+            var spinner = document.getElementById('spinner');
+            var loginButton = document.getElementById('loginButton');
+            
+            // Show the spinner
+            spinner.style.display = 'inline-block';
+            loginButton.disabled = true;  // Disable the login button while processing
+
+            // You can add additional logic here if you need to handle form submission or other events
+        });
+    </script>
+    </div>
+{% endblock %}

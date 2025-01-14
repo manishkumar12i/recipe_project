@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+  {%block content %} 
+  {% if messages %}
+  <div class="alert alert-secondary text-center" role="alert">
+      {% for message in messages %}
+      {{ message }}
+      {% endfor %}
+  </div>
+  {% endif %}
+      <form class="col-6  mx-auto card p-3 shadow-lg" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+        <h2 class="container-md  text-center">Add Receipe </h1><hr>
+        <div class="mb-5 ">
+          <label for="exampleInputEmail1" class="form-label">Receipe Name</label>
+          <input name="receipe_name"  type="text" class="form-control" required>
+        </div>
+        <div class="mb-3">
+          <label for="exampleInputPassword1"  class="form-label">Receipe Description</label>
+          <textarea class="form-control" name="receipe_description" required ></textarea>
+        </div>
+
+        <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">Receipe Image</label>
+            <input  name="receipe_image" type="file" class="form-control" required>
+          </div>
+        <button type="submit" class="btn btn-success">Add Receipe</button>
+      </form>
+      <hr>
+      <div class="mt-5 text-center">
+      <div class="mx-auto col-6">
+        <form>
+        <div class="mb-3 ">
+          <label for="exampleInputEmail1" class="form-label ">Search Food</label>
+          <input name="query"  type="text" class="form-control">
+        </div>
+        <button type="submit" class="btn btn-primary">Search</button>
+      </form>
+      </div>
+      </div>
+      <table class="table table-bordered text-center mt-5">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Receipe Name</th>
+            <th scope="col">Receipe Description</th>
+            <th scope="col">Image</th>
+            <th scope="col">Total Views</th>
+            <th scope="col">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+        {%if receipes%}
+        {% for receipe in receipes%}
+          <tr>
+            <th scope="row">{{forloop.counter}}</th>
+            <td>{{receipe.receipe_name}}</td>
+            <td>{{receipe.receipe_description}}</td>
+            <td><img src="{{receipe.receipe_image.url}}" alt="" style="height:120px; border-radius:10px;  cursor:pointer;" ></td>
+            <td>{{receipe.receipe_view_count}}</td>
+            <td>
+              <a href="/update_receipes/{{receipe.id}}" class="btn btn-warning">Update</a><hr>
+              <a href="/delete_receipes/{{receipe.id}}" class="btn btn-danger">Delete</a>  
+            </td>
+          </tr>
+        {% endfor %}
+        {%else%}
+        <tr>
+          <th scope="row">No data found </th>
+          <td>No data found </td>
+          <td>No data found </td>
+          <td><img src="" alt="" style="height:120px; border-radius:10px;  cursor:pointer;" >No data found </td>
+          <td>No data found</td>
+        </tr>
+        {% endif %}
+        </tbody>
+      </table>
+    </div>
+{% endblock%}

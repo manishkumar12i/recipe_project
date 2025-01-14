@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+  {%block content %} 
+    <div class="container mt-5">
+        <form class="col-6  mx-auto card p-3 shadow-lg" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+        <h2 class="container-md  text-center">Register Here ! </h1><hr>
+            {% if messages %}
+            <div class="alert alert-secondary text-center" role="alert">
+                {% for message in messages %}
+                {{ message }}
+                {% endfor %}
+            </div>
+            {% endif %}
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">First Name</label>
+                <input type="text" name="first_name" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="enter your first name">
+              </div>
+            
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Last Name</label>
+                <input type="text" name="last_name"  class="form-control" id="exampleInputEmail1" placeholder="enter your last name"  aria-describedby="emailHelp">
+              </div>
+            
+            
+                <div class="mb-3">
+                  <label for="exampleInputEmail1" class="form-label">Username</label>
+                  <input type="text" name="username" class="form-control" id="exampleInputEmail1" placeholder="enter user name">
+                </div>
+                <div class="mb-3">
+                  <label for="exampleInputPassword1" class="form-label">Password</label>
+                  <input type="password" class="form-control" name="password" id="exampleInputPassword1"  placeholder="enter password ">
+                </div>
+            <p>Already have  account <a href="/login/">Login here</a></p>
+        <button type="submit" class="btn btn-success">Register here</button>
+      </form>
+      </div>
+      </div>
+    </div>
+{% endblock%}

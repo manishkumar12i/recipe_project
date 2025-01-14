@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block content %}
+<style>
+
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+</style>
+
+<div class="container">
+    <h1 class="text-center">Our Recipes</h1>
+    {% if receipes %}
+        {% for receipe in receipes %}
+        <div class="card mb-3 text-center recipe-card">
+            <img src="{{ receipe.receipe_image.url }}" class="card-img-top" alt="recipe_images" style="height: 300px; width: 100%; object-fit: cover; border-radius: 10px; cursor:pointer;">
+            <div class="card-body">
+                <h3 class="card-title">{{ receipe.receipe_name }}</h3>
+                <p class="card-text">{{ receipe.receipe_description }}</p>
+                <p class="card-text"><small class="text-body-secondary">Last updated on <b>{{ receipe.updated_at }}</b></small></p>
+        </div>
+      </div>
+        {% endfor %}
+    {% endif %}
+</div>
+{% endblock %}
